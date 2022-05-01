@@ -20,22 +20,21 @@
             </div>
         </div>
         <div class="layout-between">
-            <!-- <div class="music-image">
-                <img src="images/pic1.jpg" alt="music-image">
-            </div> -->
-            <!-- <div class="textName">
-                <h3 class="music-name">Tên bài hát</h3>
-                <p class="singer-name">Ca sỹ:</p>
-            </div> -->
-            <div class="range-group">
-                <!-- <input type="range" class="range" onchange="changeRangeBar()"> -->
-                <audio src="musics/AmoreMio.mp3" id="song" onended="endSong()"></audio>
+            <div class="music-image">
+                <img src="images/nodisc.png" alt="music-image">
             </div>
-            <!-- <div class="times">
+            <div class="textName">
+                <h5 class="music-name">VUI LÒNG THÊM BÀI HÁT VÀO DANH SÁCH PHÁT</h5>
+            </div>
+            <div class="range-group">
+                <input type="range" class="range" onchange="changeRangeBar()">
+                <audio src="" id="song" onended="endSong()"></audio>
+            </div>
+            <div class="times">
                 <div class="present-time"></div>
                 <div class="duration-time"></div>
-            </div> -->
-            <!-- <div class="controls">
+            </div>
+            <div class="controls">
                 <ion-icon name="shuffle" class="ion-icon"></ion-icon>
                 <ion-icon name="play-back" class="ion-icon play-back" onclick="playBack()"></ion-icon>
                 <div class="play-pause">
@@ -43,8 +42,8 @@
                 </div>
                 <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
                 <ion-icon name="repeat" class="ion-icon"></ion-icon>
-            </div> -->
-            <!-- <div class="action">
+            </div>
+            <div class="action">
                 <div class="addMusic">
                     <button type="button" class="btn btn-primary" onclick="openListSong()">DANH SÁCH BÀI HÁT</button>
                 </div>
@@ -52,7 +51,7 @@
                     <span id="list-sp">DANH SÁCH PHÁT</span>
                     <ion-icon name="menu" class="ion-icon" id="icon-menu" onclick="openPlayList()"></ion-icon>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="layout-right lr-hidden">
             <h1>DANH SÁCH PHÁT</h1>
