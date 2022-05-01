@@ -10,9 +10,10 @@
     color: #333;
 }
 
-h1{
+h1 {
     text-align: center;
 }
+
 .container {
     max-width: 100%;
     display: flex;
@@ -26,7 +27,7 @@ h1{
 
 
 .layout-between {
-    width: 30%;
+    width: 28%;
     height: 680px;
     background-color: white;
     margin: 10px auto;
@@ -39,11 +40,12 @@ h1{
 }
 
 .music-image>img {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     display: block;
     margin: 0 auto;
-    border-radius: 100px;
+    border-radius: 125px;
+    animation: spinner 5s infinite linear;
 }
 
 .textName {
@@ -84,7 +86,7 @@ h1{
 
 .action {
     width: 90%;
-    margin: 160px auto;
+    margin: 140px auto;
     display: flex;
     justify-content: space-between;
     font-size: 15px;
@@ -112,16 +114,19 @@ h1{
 }
 
 .layout-left {
-    width: 30%;
+    width: 35%;
     height: 680px;
     background-color: rgb(27, 158, 168);
-    margin: 10px auto;
+    margin: 10px;
+    margin-left: 10px;
     border-radius: 15px;
 
 }
+
 .list-song {
     width: 100%;
 }
+
 .lists {
     margin: 10px auto;
     width: 100%;
@@ -130,30 +135,36 @@ h1{
     background-color: white;
     border-radius: 7px;
 }
+
 .list-icon {
     width: 5%;
 }
+
 .list-image {
     width: 20%;
 }
+
 .list-title {
-    width:60%;
+    width: 60%;
 }
 
 .avatar {
     display: block;
     width: 50px;
     height: 50px;
-    
+
 }
+
 .layout-right {
-    width: 30%;
+    width: 35%;
     height: 680px;
     background-color: rgb(27, 158, 168);
-    margin: 10px auto;
+    margin: 10px;
+    margin-right: 10px;
     border-radius: 15px;
 
 }
+
 .playList {
     width: 35%;
     height: 680px;
@@ -161,6 +172,7 @@ h1{
     margin: 10px auto;
     border-radius: 15px;
 }
+
 .list-playing {
     width: 100%;
 }
@@ -174,4 +186,10 @@ h1{
 } */
 .add-hidden {
     visibility: hidden;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
 }

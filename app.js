@@ -13,8 +13,8 @@ class Music {
 var musics = [
     new Music(1, 'lalatran.jpg', 'Anh Yêu Vội Thế - Remix', 'Lala Trần', 'AnhYeuVoiThe.mp3'),
     new Music(2, 'thientu.jpg', 'Cô Độc Vương - Remix', 'Thiên Tú', 'CoDocVuongRemix.mp3'),
-    new Music(3, 'dunghoangpham.jpg', 'Đế Vương - Remix', 'Dung Hoàng Phạm'),
-    new Music(4, 'xuanduc.jpg', 'Mãi Mãi Là Bao Lâu - ReMix', 'Xuân Đức', 'DeVuongRemix.mp3'),
+    new Music(3, 'dunghoangpham.jpg', 'Đế Vương - Remix', 'Dung Hoàng Phạm', 'DeVuongRemix.mp3'),
+    new Music(4, 'xuanduc.jpg', 'Mãi Mãi Là Bao Lâu - ReMix', 'Xuân Đức', 'MaiMaiLaBaoLau.mp3'),
     new Music(5, 'tangduytan.jpg', 'Ngây Thơ', 'Tăng Duy Tân', 'NgayTho.mp3')
 ]
 
@@ -24,7 +24,7 @@ var newMusics = [];
 
 
 function renderListSong() {
-    let htmls = musics.map(function (music, index) {
+    let htmls = musics.map(function (music) {
         return `
             <div class="lists">
             <div class="list-icon"><ion-icon name="musical-notes"></ion-icon></div>
@@ -33,7 +33,7 @@ function renderListSong() {
                 <h3>${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-add${index}"><ion-icon name="add-circle-outline" class="ion-icon" onclick="addPlaylist(${index})"></ion-icon></div>
+            <div class="list-add${music.id}"><ion-icon name="add-circle-outline" class="ion-icon" onclick="addPlaylist(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -41,7 +41,7 @@ function renderListSong() {
 }
 
 function renderListPlaying() {
-    let htmls = newMusics.map(function (music, index) {
+    let htmls = newMusics.map(function (music) {
         return `
             <div class="lists">
             <div class="list-icon"><ion-icon name="musical-notes"></ion-icon></div>
@@ -50,7 +50,7 @@ function renderListPlaying() {
                 <h3>${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-remove"><ion-icon name="trash-outline" class="ion-icon" onclick="removeSong(${index})"></ion-icon></div>
+            <div class="list-remove"><ion-icon name="trash-outline" class="ion-icon" onclick="removeSong(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -61,7 +61,7 @@ function renderListPlaying() {
 
 
 function displayMusicPlayer() {
-    let htmls = newMusics.map(function (music, index) {
+    let htmls = newMusics.map(function (music) {
         return `
             <div class="music-image" id='music-imageid'>
                 <img src="images/${music.image}" alt="music-image">
@@ -71,7 +71,7 @@ function displayMusicPlayer() {
                 <p class="singer-name">Trình bày: ${music.singer}</p>
             </div>
             <div class="range-group">
-                <input type="range" class="range" onchange="changeRangeBar()">
+                <input type="range" class="range" oninput="changeRangeBar()">
                 <audio src="musics/${music.musicFile}" id="song" onended="endSong()"></audio>
             </div>
             <div class="times">
@@ -79,13 +79,13 @@ function displayMusicPlayer() {
                 <div class="duration-time"></div>
             </div>
             <div class="controls">
-                <ion-icon name="shuffle" class="ion-icon"></ion-icon>
+                <ion-icon name="shuffle" id="random" class="ion-icon" onclick="playRandom()" ></ion-icon>
                 <ion-icon name="play-back" class="ion-icon play-back" onclick="playBack()"></ion-icon>
                 <div class="play-pause">
                     <ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>
                 </div>
                 <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
-                <ion-icon name="repeat" class="ion-icon"></ion-icon>
+                <ion-icon name="repeat" id="repeat" class="ion-icon" onclick="repeatSong()"></ion-icon>
             </div>
             <div class="action">
                 <div class="addMusic">
@@ -141,21 +141,55 @@ function displayMusicPlayer() {
     }
 }
 
-renderListSong();
-renderListPlaying();
-displayMusicPlayer();
+
+function addPlaylist(id) {
+    let checkMusic = newMusics.find(function (musical) {
+        return musical.id == id;
+
+    })
+    if (!checkMusic) {
+        let music;
+        for (let i = 0; i < musics.length; i++) {
+            if (musics[i].id == id) {
+                music = musics[i];
+            }
+        }
+        newMusics.push(music);
+        document.querySelector(`.list-add${id}`).classList.add("add-hidden");
+        renderListPlaying();
+        displayMusicPlayer();
+    }
+    else {
+        alert('Bài hát này đã có trong danh sách phát rồi');
+    }
+}
+
+function removeSong(id) {
+    let music;
+    let index;
+    for (let i = 0; i < newMusics.length; i++) {
+        if (newMusics[i].id == id) {
+            music = newMusics[i];
+            index = i;
+        }
+    }
+    let confirmed = window.confirm(`Bạn chắc chắn muốn xóa bài hát: ${music.songName} ra khỏi danh sách phát?`);
+    if (confirmed) {
+        newMusics.splice(index, 1);
+        document.querySelector(`.list-add${id}`).classList.remove("add-hidden");
+        renderListPlaying();
+        displayMusicPlayer();
+    }
+}
+
+
 let song = document.querySelector('#song');
 let indexSong = 0;
-// let playbtn = document.querySelector('.play-pause');
-// let backbtn = document.querySelector('.play-back');
-// let forwardbtn = document.querySelector('.play-forward');
-// let durationTime = document.querySelector('.duration-time');
-// let presentTime = document.querySelector('.present-time');
-let rangeBar = document.querySelector('.range');
+
 
 function displayTime() {
-    rangeBar.max = song.duration;
-    rangeBar.value = song.currentTime;
+    document.querySelector('.range').max = song.duration;
+    document.querySelector('.range').value = song.currentTime;
     if (!song.duration) {
         document.querySelector('.present-time').innerHTML = "00:00";
         document.querySelector('.duration-time').innerHTML = "00:00";
@@ -190,10 +224,10 @@ function playPause() {
 
 
 function displayChange(index) {
-    document.querySelector('.music-image').setAttribute("src", `images/thientu.jpg`);
+    document.querySelector('.music-image>img').src = `images/${newMusics[index].image}`;
     document.querySelector('.music-name').innerHTML = `${newMusics[index].songName}`;
     document.querySelector('.singer-name').innerHTML = `Trình bày: ${newMusics[index].singer}`;
-    document.querySelector('#song').src = `${newMusics[index].musicFile}`;
+    document.querySelector('#song').src = `musics/${newMusics[index].musicFile}`;
 }
 
 
@@ -229,12 +263,27 @@ function playBack() {
     notPlaying = true;
     playPause();
 }
+let repeatOn = true;
+function repeatSong() {
+    if (repeatOn) {
+        song.loop = true;
+        document.querySelector('#repeat').style.color = '#FFCC99';
+        repeatOn = false;
+    }
+    else {
+        song.loop = false;
+        document.querySelector('#repeat').removeAttribute('style');
+        repeatOn = true;
+    }
+}
 
 
+function playRandom() {
 
+}
 
 function changeRangeBar() {
-    song.currentTime = rangeBar.value;
+    song.currentTime = document.querySelector('.range').value;
 }
 
 
@@ -260,29 +309,9 @@ function closePlayList() {
     document.querySelector('.layout-right').classList.add('lr-hidden');
 }
 
-function addPlaylist(index) {
-    let checkMusic = newMusics.find(function (music) {
-        return music.id == index + 1;
-    })
-    if (!checkMusic) {
-        newMusics.push(musics[index]);
-        document.querySelector(`.list-add${index}`).classList.add("add-hidden");
-        renderListSong();
-        renderListPlaying();
-        displayMusicPlayer();
-    }
-    else {
-        alert('Bài hát này đã có trong danh sách phát rồi');
-    }
-}
 
-function removeSong(index) {
-    let confirmed = window.confirm(`Bạn chắc chắn muốn xóa bài hát: ${newMusics[index].songName} ra khỏi danh sách phát?`);
-    if (confirmed) {
-        newMusics.splice(index, 1);
-        renderListPlaying();
-        displayMusicPlayer();
-    }
-}
 displayTime();
 setInterval(displayTime, 500);
+renderListSong();
+renderListPlaying();
+displayMusicPlayer();
