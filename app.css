@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.ion-icon {
+    --ionicon-stroke-width: 64px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+h1{
+    text-align: center;
+}
+.container {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-image: url(images/background.jpg);
+    background-size: 100% 100%;
+}
+
+
+
+
+
+.layout-between {
+    width: 30%;
+    height: 680px;
+    background-color: white;
+    margin: 10px auto;
+    border-radius: 15px;
+}
+
+.music-image {
+    width: 100%;
+    margin: 50px auto;
+}
+
+.music-image>img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+
+.textName {
+    margin-bottom: 30px;
+}
+
+.music-name,
+.singer-name {
+    text-align: center;
+}
+
+.range-group {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.range {
+    width: 100%;
+}
+
+.times {
+    width: 70%;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #999;
+}
+
+.controls {
+    width: 70%;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.action {
+    width: 90%;
+    margin: 160px auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.btn-primary {
+    color: #333;
+    background-color: white;
+    border-color: white;
+    border-radius: 7px
+}
+
+.list {
+    display: flex;
+}
+
+#list-sp {
+    display: block;
+    width: 140px;
+    color: #333;
+}
+
+#icon-menu {
+    margin: -2px;
+}
+
+.layout-left {
+    width: 30%;
+    height: 680px;
+    background-color: rgb(27, 158, 168);
+    margin: 10px auto;
+    border-radius: 15px;
+
+}
+.list-song {
+    width: 100%;
+}
+.lists {
+    margin: 10px auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 7px;
+}
+.list-icon {
+    width: 5%;
+}
+.list-image {
+    width: 20%;
+}
+.list-title {
+    width:60%;
+}
+
+.avatar {
+    display: block;
+    width: 50px;
+    height: 50px;
+    
+}
+.layout-right {
+    width: 30%;
+    height: 680px;
+    background-color: rgb(27, 158, 168);
+    margin: 10px auto;
+    border-radius: 15px;
+
+}
+.playList {
+    width: 35%;
+    height: 680px;
+    background-color: white;
+    margin: 10px auto;
+    border-radius: 15px;
+}
+.list-playing {
+    width: 100%;
+}
+
+/* .ll-hidden {
+    visibility: hidden;
+}
+
+.lr-hidden {
+    visibility: hidden;
+} */
+.check-hidden {
+    visibility: hidden;
+}

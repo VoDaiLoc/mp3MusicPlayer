@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mp3 Player</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="layout-left ll-hidden">
+            <h1>DANH SÁCH BÀI HÁT</h1>
+            <ion-icon name="close-circle-outline" class="ion-icon" onclick="closeListSong()"></ion-icon>
+            <hr>
+            <div class="list-song">
+
+            </div>
+        </div>
+        <div class="layout-between">
+            <!-- <div class="music-image">
+                <img src="images/pic1.jpg" alt="music-image">
+            </div> -->
+            <!-- <div class="textName">
+                <h3 class="music-name">Tên bài hát</h3>
+                <p class="singer-name">Ca sỹ:</p>
+            </div> -->
+            <div class="range-group">
+                <!-- <input type="range" class="range" onchange="changeRangeBar()"> -->
+                <audio src="musics/AmoreMio.mp3" id="song" onended="endSong()"></audio>
+            </div>
+            <!-- <div class="times">
+                <div class="present-time"></div>
+                <div class="duration-time"></div>
+            </div> -->
+            <!-- <div class="controls">
+                <ion-icon name="shuffle" class="ion-icon"></ion-icon>
+                <ion-icon name="play-back" class="ion-icon play-back" onclick="playBack()"></ion-icon>
+                <div class="play-pause">
+                    <ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>
+                </div>
+                <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
+                <ion-icon name="repeat" class="ion-icon"></ion-icon>
+            </div> -->
+            <!-- <div class="action">
+                <div class="addMusic">
+                    <button type="button" class="btn btn-primary" onclick="openListSong()">DANH SÁCH BÀI HÁT</button>
+                </div>
+                <div class="list">
+                    <span id="list-sp">DANH SÁCH PHÁT</span>
+                    <ion-icon name="menu" class="ion-icon" id="icon-menu" onclick="openPlayList()"></ion-icon>
+                </div>
+            </div> -->
+        </div>
+        <div class="layout-right lr-hidden">
+            <h1>DANH SÁCH PHÁT</h1>
+            <ion-icon name="close-circle-outline" class="ion-icon" onclick="closePlayList()"></ion-icon>
+            <hr>
+            <div class="list-playing">
+
+            </div>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"> </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
