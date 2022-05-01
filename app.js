@@ -63,7 +63,7 @@ function renderListPlaying() {
 function displayMusicPlayer() {
     let htmls = newMusics.map(function (music, index) {
         return `
-            <div class="music-image">
+            <div class="music-image" id='music-imageid'>
                 <img src="images/${music.image}" alt="music-image">
             </div>
             <div class="textName">
@@ -110,8 +110,8 @@ function displayMusicPlayer() {
             <audio src="" id="song" onended="endSong()"></audio>
         </div>
         <div class="times">
-            <div class="present-time"></div>
-            <div class="duration-time"></div>
+            <div class="present-time">00:00</div>
+            <div class="duration-time">00:00</div>
         </div>
         <div class="controls">
             <ion-icon name="shuffle" class="ion-icon"></ion-icon>
@@ -134,39 +134,42 @@ function displayMusicPlayer() {
             `
     if (newMusics.length > 0) {
         document.querySelector('.layout-between').innerHTML = htmls.join('');
+        song = document.querySelector('#song');
     }
     else {
         document.querySelector('.layout-between').innerHTML = htmlsDefault;
     }
 }
 
-
+renderListSong();
+renderListPlaying();
+displayMusicPlayer();
 let song = document.querySelector('#song');
 let indexSong = 0;
-let playbtn = document.querySelector('.play-pause');
-let backbtn = document.querySelector('.play-back');
-let forwardbtn = document.querySelector('.play-forward');
-let durationTime = document.querySelector('.duration-time');
-let presentTime = document.querySelector('.present-time');
+// let playbtn = document.querySelector('.play-pause');
+// let backbtn = document.querySelector('.play-back');
+// let forwardbtn = document.querySelector('.play-forward');
+// let durationTime = document.querySelector('.duration-time');
+// let presentTime = document.querySelector('.present-time');
 let rangeBar = document.querySelector('.range');
 
 function displayTime() {
     rangeBar.max = song.duration;
     rangeBar.value = song.currentTime;
     if (!song.duration) {
-        presentTime.textContent = "00:00";
-        durationTime.textContent = "00:00";
+        document.querySelector('.present-time').innerHTML = "00:00";
+        document.querySelector('.duration-time').innerHTML = "00:00";
     }
     else {
-        presentTime.textContent = formatTime(song.currentTime);
-        durationTime.textContent = formatTime(song.duration);
+        document.querySelector('.present-time').innerHTML = formatTime(song.currentTime);
+        document.querySelector('.duration-time').innerHTML = formatTime(song.duration);
     }
 }
 
 function formatTime(time) {
     let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time - minutes * 60);
-    return `${minutes}:${seconds}`;
+    return `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 }
 
 
@@ -176,27 +179,37 @@ function playPause() {
     if (notPlaying) {
         song.play();
         notPlaying = false;
-        playbtn.innerHTML = `<ion-icon name="pause" class="ion-icon" onclick="playPause()"></ion-icon>`;
+        document.querySelector('.play-pause').innerHTML = `<ion-icon name="pause" class="ion-icon" onclick="playPause()"></ion-icon>`;
     }
     else {
         song.pause();
         notPlaying = true;
-        playbtn.innerHTML = `<ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>`;
+        document.querySelector('.play-pause').innerHTML = `<ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>`;
     }
 }
 
 
+function displayChange(index) {
+    document.querySelector('.music-image').setAttribute("src", `images/thientu.jpg`);
+    document.querySelector('.music-name').innerHTML = `${newMusics[index].songName}`;
+    document.querySelector('.singer-name').innerHTML = `Trình bày: ${newMusics[index].singer}`;
+    document.querySelector('#song').src = `${newMusics[index].musicFile}`;
+}
+
+
+
 function playForward() {
     indexSong++;
-    if (indexSong >= musics.length) {
+    if (indexSong >= newMusics.length) {
         indexSong = 0;
-
+        displayChange(indexSong);
         notPlaying = true;
         playPause();
 
     }
     else {
 
+        displayChange(indexSong);
         notPlaying = true;
         playPause();
     }
@@ -207,12 +220,12 @@ function playForward() {
 function playBack() {
     indexSong--;
     if (indexSong < 0) {
-        indexSong = musics.length - 1;
-
+        indexSong = newMusics.length - 1;
+        displayChange(indexSong);
         notPlaying = true;
         playPause();
     }
-
+    displayChange(indexSong);
     notPlaying = true;
     playPause();
 }
@@ -273,6 +286,3 @@ function removeSong(index) {
 }
 displayTime();
 setInterval(displayTime, 500);
-renderListSong();
-renderListPlaying();
-displayMusicPlayer();
