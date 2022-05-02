@@ -233,53 +233,79 @@ function displayChange(index) {
 
 
 function playForward() {
-    indexSong++;
-    if (indexSong >= newMusics.length) {
-        indexSong = 0;
-        displayChange(indexSong);
-        notPlaying = true;
-        playPause();
-
+    if (isRandom) {
+        randomSong();
     }
     else {
+        indexSong++;
+        if (indexSong >= newMusics.length) {
+            indexSong = 0;
+            displayChange(indexSong);
+            notPlaying = true;
+            playPause();
 
-        displayChange(indexSong);
-        notPlaying = true;
-        playPause();
+        }
+        else {
+
+            displayChange(indexSong);
+            notPlaying = true;
+            playPause();
+        }
+
     }
 
-}
 
-
-function playBack() {
-    indexSong--;
-    if (indexSong < 0) {
-        indexSong = newMusics.length - 1;
-        displayChange(indexSong);
-        notPlaying = true;
-        playPause();
+    function playBack() {
+        if (isRandom) {
+            randomSong();
+        }
+        else {
+            indexSong--;
+            if (indexSong < 0) {
+                indexSong = newMusics.length - 1;
+                displayChange(indexSong);
+                notPlaying = true;
+                playPause();
+            }
+            displayChange(indexSong);
+            notPlaying = true;
+            playPause();
+        }
     }
-    displayChange(indexSong);
-    notPlaying = true;
-    playPause();
+
+
 }
-let repeatOn = true;
+let repeatOn = false;
 function repeatSong() {
-    if (repeatOn) {
+    if (!repeatOn) {
         song.loop = true;
         document.querySelector('#repeat').style.color = '#FFCC99';
-        repeatOn = false;
+        repeatOn = true;
     }
     else {
         song.loop = false;
         document.querySelector('#repeat').removeAttribute('style');
-        repeatOn = true;
+        repeatOn = false;
     }
 }
 
+function randomSong() {
+    let newIndexSong = Math.floor(Math.random() * newMusics.length);
+    displayChange(newIndexSong);
+    notPlaying = true;
+    playPause();
+}
 
+let isRandom = false;
 function playRandom() {
-
+    if (!isRandom) {
+        document.querySelector('#random').style.color = '#FFCC99';
+        isRandom = true;
+    }
+    else {
+        document.querySelector('#random').removeAttribute('style');
+        isRandom = false;
+    }
 }
 
 function changeRangeBar() {
