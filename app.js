@@ -61,18 +61,17 @@ function renderListPlaying() {
 
 
 function displayMusicPlayer() {
-    let htmls = newMusics.map(function (music) {
-        return `
+    let htmls = `
             <div class="music-image" id='music-imageid'>
-                <img src="images/${music.image}" alt="music-image">
+                <img src="images/${newMusics[0].image}" alt="music-image">
             </div>
             <div class="textName">
-                <h3 class="music-name">${music.songName}</h3>
-                <p class="singer-name">Trình bày: ${music.singer}</p>
+                <h3 class="music-name">${newMusics[0].songName}</h3>
+                <p class="singer-name">Trình bày: ${newMusics[0].singer}</p>
             </div>
             <div class="range-group">
                 <input type="range" class="range" oninput="changeRangeBar()">
-                <audio src="musics/${music.musicFile}" id="song" onended="endSong()"></audio>
+                <audio src="musics/${newMusics[0].musicFile}" id="song" onended="endSong()"></audio>
             </div>
             <div class="times">
                 <div class="present-time"></div>
@@ -97,7 +96,6 @@ function displayMusicPlayer() {
                 </div>
             </div>
         `
-    })
     let htmlsDefault = `
         <div class="music-image">
         <img src="images/nodisc.png" alt="music-image">
@@ -133,7 +131,7 @@ function displayMusicPlayer() {
         </div>
             `
     if (newMusics.length > 0) {
-        document.querySelector('.layout-between').innerHTML = htmls.join('');
+        document.querySelector('.layout-between').innerHTML = htmls
         song = document.querySelector('#song');
     }
     else {
@@ -177,6 +175,9 @@ function removeSong(id) {
     if (confirmed) {
         newMusics.splice(index, 1);
         document.querySelector(`.list-add${id}`).classList.remove("add-hidden");
+        if (newMusics.length == 0) {
+            song = null;
+        }
         renderListPlaying();
         displayMusicPlayer();
     }
@@ -253,28 +254,27 @@ function playForward() {
         }
 
     }
+}
 
-
-    function playBack() {
-        if (isRandom) {
-            randomSong();
-        }
-        else {
-            indexSong--;
-            if (indexSong < 0) {
-                indexSong = newMusics.length - 1;
-                displayChange(indexSong);
-                notPlaying = true;
-                playPause();
-            }
+function playBack() {
+    if (isRandom) {
+        randomSong();
+    }
+    else {
+        indexSong--;
+        if (indexSong < 0) {
+            indexSong = newMusics.length - 1;
             displayChange(indexSong);
             notPlaying = true;
             playPause();
         }
+        displayChange(indexSong);
+        notPlaying = true;
+        playPause();
     }
-
-
 }
+
+
 let repeatOn = false;
 function repeatSong() {
     if (!repeatOn) {
@@ -290,10 +290,14 @@ function repeatSong() {
 }
 
 function randomSong() {
-    let newIndexSong = Math.floor(Math.random() * newMusics.length);
+    let newIndexSong
+    do {
+        newIndexSong = Math.floor(Math.random() * newMusics.length);
+    } while (newIndexSong == indexSong);
     displayChange(newIndexSong);
     notPlaying = true;
     playPause();
+    indexSong = newIndexSong;
 }
 
 let isRandom = false;
@@ -314,7 +318,12 @@ function changeRangeBar() {
 
 
 function endSong() {
-    playForward();
+    if (!isRandom) {
+        randomSong();
+    }
+    else {
+        playForward();
+    }
 }
 
 
