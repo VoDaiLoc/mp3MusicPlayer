@@ -33,7 +33,7 @@ function renderListSong() {
                 <h3>${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-add${music.id}"><ion-icon name="add-circle-outline" class="ion-icon" onclick="addPlaylist(${music.id})"></ion-icon></div>
+            <div class="list-add${music.id} list-icon"><ion-icon name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -50,7 +50,7 @@ function renderListPlaying() {
                 <h3 class="linkSongName" onclick="playSong(${music.id})">${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-remove"><ion-icon name="trash-outline" class="ion-icon" onclick="removeSong(${music.id})"></ion-icon></div>
+            <div class="list-remove list-icon"><ion-icon name="trash-outline"  onclick="removeSong(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -208,11 +208,9 @@ function formatTime(time) {
 }
 
 function playSong(id) {
-    let music;
     let index;
     for (let i = 0; i < newMusics.length; i++) {
         if (newMusics[i].id == id) {
-            music = newMusics[i];
             index = i;
         }
     }
