@@ -45,7 +45,6 @@ h1 {
     display: block;
     margin: 0 auto;
     border-radius: 125px;
-    animation: spinner 5s infinite linear;
 }
 
 .textName {
@@ -171,6 +170,10 @@ h1 {
     background-color: white;
     margin: 10px auto;
     border-radius: 15px;
+}
+
+.linkSongName {
+    cursor: pointer;
 }
 
 .list-playing {

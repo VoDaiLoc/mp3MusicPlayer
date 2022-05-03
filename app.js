@@ -47,7 +47,7 @@ function renderListPlaying() {
             <div class="list-icon"><ion-icon name="musical-notes"></ion-icon></div>
             <div class="list-image"><img src="images/${music.image}" alt="image${music.id}" class="avatar"></div>
             <div class="list-title">
-                <h3>${music.songName}</h3>
+                <h3 class="linkSongName" onclick="playSong(${music.id})">${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
             <div class="list-remove"><ion-icon name="trash-outline" class="ion-icon" onclick="removeSong(${music.id})"></ion-icon></div>
@@ -62,8 +62,8 @@ function renderListPlaying() {
 
 function displayMusicPlayer() {
     let htmls = `
-            <div class="music-image" id='music-imageid'>
-                <img src="images/${newMusics[0].image}" alt="music-image">
+            <div class= "music-image" id='music-imageid'>
+                <img class= "image ani-none" src="images/${newMusics[0].image}" alt="music-image">
             </div>
             <div class="textName">
                 <h3 class="music-name">${newMusics[0].songName}</h3>
@@ -97,8 +97,8 @@ function displayMusicPlayer() {
             </div>
         `
     let htmlsDefault = `
-        <div class="music-image">
-        <img src="images/nodisc.png" alt="music-image">
+        <div class= "music-image">
+        <img class= "image ani-none" src="images/nodisc.png" alt="music-image">
         </div>
         <div class="textName">
             <h5 class="music-name">VUI LÒNG THÊM BÀI HÁT VÀO DANH SÁCH PHÁT</h5>
@@ -207,6 +207,19 @@ function formatTime(time) {
     return `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 }
 
+function playSong(id) {
+    let music;
+    let index;
+    for (let i = 0; i < newMusics.length; i++) {
+        if (newMusics[i].id == id) {
+            music = newMusics[i];
+            index = i;
+        }
+    }
+    displayChange(index);
+    playPause();
+}
+
 
 
 let notPlaying = true;
@@ -215,11 +228,13 @@ function playPause() {
         song.play();
         notPlaying = false;
         document.querySelector('.play-pause').innerHTML = `<ion-icon name="pause" class="ion-icon" onclick="playPause()"></ion-icon>`;
+        document.querySelector('.image').style.animation = 'spinner 10s infinite linear';
     }
     else {
         song.pause();
         notPlaying = true;
         document.querySelector('.play-pause').innerHTML = `<ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>`;
+        document.querySelector('.image').removeAttribute('style');
     }
 }
 
