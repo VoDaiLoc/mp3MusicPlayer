@@ -105,7 +105,7 @@ h4 {
 .layout-left {
     width: 35%;
     height: 680px;
-    background-color: rgb(27, 158, 168);
+    background-color: gray;
     margin: 10px;
     margin-left: 10px;
     border-radius: 15px;
@@ -150,7 +150,7 @@ h4 {
 .layout-right {
     width: 35%;
     height: 680px;
-    background-color: rgb(27, 158, 168);
+    background-color: gray;
     margin: 10px;
     margin-right: 10px;
     border-radius: 15px;
