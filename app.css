@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .ion-icon {
@@ -13,6 +14,22 @@
 h1 {
     text-align: center;
     margin: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+    cursor: pointer;
+}
+
+.lyrics {
+    width: 100%;
+    height: 680px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 .container {
@@ -163,6 +180,10 @@ h1 {
 
 }
 
+.close {
+    text-align: right;
+}
+
 .layout-right {
     width: 35%;
     height: 680px;
@@ -189,13 +210,13 @@ h1 {
     width: 100%;
 }
 
-/* .ll-hidden {
-    visibility: hidden;
+.lsong-hidden {
+    display: none;
+}
+.lyrics-hidden {
+    display: none;
 }
 
-.lr-hidden {
-    visibility: hidden;
-} */
 .add-hidden {
     visibility: hidden;
 }

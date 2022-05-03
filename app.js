@@ -86,6 +86,7 @@ function displayMusicPlayer() {
                 <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
                 <ion-icon name="repeat" id="repeat" class="ion-icon" onclick="repeatSong()"></ion-icon>
             </div>
+            <div id ="lyric"><h4 onclick="displayLyrics(${newMusics[0].id})">Lời bài hát</h4></div>
           
         `
     let htmlsDefault = `
@@ -231,6 +232,7 @@ function displayChange(index) {
     document.querySelector('.music-name').innerHTML = `${newMusics[index].songName}`;
     document.querySelector('.singer-name').innerHTML = `Trình bày: ${newMusics[index].singer}`;
     document.querySelector('#song').src = `musics/${newMusics[index].musicFile}`;
+    document.querySelector('#lyric').innerHTML = `<h4 onclick="displayLyrics(${newMusics[index].id})">Lời bài hát</h4>`;
 }
 
 
@@ -328,23 +330,11 @@ function endSong() {
     }
 }
 
-
-function openListSong() {
-    document.querySelector('.layout-left').classList.remove('ll-hidden');
+function closeLyrics() {
+    document.querySelector('.listSong').classList.remove('lsong-hidden')
+    document.querySelector('.lyrics').classList.add('lyrics-hidden')
 }
 
-function openPlayList() {
-    document.querySelector('.layout-right').classList.remove('lr-hidden');
-}
-
-
-function closeListSong() {
-    document.querySelector('.layout-left').classList.add('ll-hidden');
-}
-
-function closePlayList() {
-    document.querySelector('.layout-right').classList.add('lr-hidden');
-}
 
 
 displayTime();
@@ -352,3 +342,193 @@ setInterval(displayTime, 500);
 renderListSong();
 renderListPlaying();
 displayMusicPlayer();
+
+function displayLyrics(id) {
+    let lyrics1 = `
+    <div class="close"><ion-icon name="close-circle-outline" class="list-icon" onclick="closeLyrics()"></ion-icon>
+    </div>
+    <div>
+    <pre>
+    <h2>ANH YÊU VỘI THẾ</h2>
+    Còn đấy những khát khao, yêu thương đang dâng trào
+    Ngày hôm nay em đành quên
+    Phải cố gắng bước qua, chẳng thể nói thứ tha
+    Người đi làm tim em buồn
+
+    Vì những tổn thương ai gieo lâu nay vỡ nát rồi
+    Chỉ biết khóc cười vậy thôi
+    Nếu Anh là Em
+    Em muốn kết thúc nhưng Anh phải đau ngàn lần hơn…
+
+    Anh đi vào sâu tim em
+    Giết chết yêu thương ở đây
+    Sẽ còn mãi nơi này
+    Hình dung một người thay đổi
+
+    Anh yêu vộj thế, cứ thích buông lời trêu đùa
+    Chẳng biết đâu thật tâm là ngọt ngào hay lừa dối
+    Đến bây giờ sau cơn mê em mới thấu ra
+    Trong tim anh lâu nay chỉ toàn dối gian
+
+    Đêm nay bật khóc, biết trót yêu người sai lầm
+    Đánh mất đi bản thân vì nhiều điều anh từng nói
+    Hãy giả vờ quên tên em, để em thứ tha cho bản thân vội vàng
+    Cho trái tim em nơi này.
+    `
+    let lyrics2 = `
+    <div class="close"><ion-icon name="close-circle-outline" class="list-icon" onclick="closeLyrics()"></ion-icon>
+    </div>
+    <div>
+    <pre>
+    <h2>CÔ ĐỘC VƯƠNG</h2>
+    Nửa đời sầu nửa đời âu, gập ghềnh mưa gió nửa đời người
+    Chợt nhận ra tuyết rơi, bên khung cửa sổ
+    Lệ ta rơi lòng ta đau,thừa cô đơn quá dư u sầu
+    Tìm men say chỉ mong, Sẽ yên lòng hơn.
+
+    Mình tôi lê bước, lạc vào giấc mơ hão huyền
+    Mà đâu biết em phũ phàng, thiên Sơn đất trời
+    Ngàn bình rượu đựng nào vơi, tổn thương bấy lâu
+    Nguyện thân trai một đời, bóng cô góc trời
+    Mờ xa gió mưa chẳng màng, thôi kiếp này chọn một mình
+    Giọt lệ ta sẽ chẳng rơi một lần
+    Nửa đời sầu nửa đời âu, gập ghềnh mưa gió nửa đời người
+    Chợt nhận ra tuyết rơi, bên khung cửa sổ
+    Lệ ta rơi lòng ta đau, thừa cô đơn quá dư u sầu
+    Tìm men say chỉ mong, sẽ yên lòng hơn
+
+    Mình tôi lê bước, lạc vào giấc mơ hão huyền
+    Mà đâu biết em phũ phàng, thiên Sơn đất trời
+    Ngàn bình rượu đựng nào vơi, tổn thương bấy lâu
+    Nguyện thân trai một đời
+    Bóng cô góc trời, mờ xa gió mưa chẳng màng
+    Thôi kiếp này chọn một mình, giọt lệ ta sẽ chẳng rơi một lần.
+
+    Mình tôi lê bước, lạc vào giấc mơ hão huyền
+    Mà đâu biết em phũ phàng, thiên Sơn đất trời
+    Ngàn bình rượu đựng nào vơi, tổn thương bấy lâu
+    Nguyện thân trai một đời, bóng cô góc trời
+    Mờ xa gió mưa chẳng màng, thôi kiếp này chọn một mình
+    Giọt lệ ta sẽ chẳng rơi một lần
+    Trọn cuộc đời một mình thôi, vẫn bước đi về về đâu.
+    </pre>
+    </div>
+    `
+    let lyrics3 = `
+    <div class="close"><ion-icon name="close-circle-outline" class="list-icon" onclick="closeLyrics()"></ion-icon>
+    </div>
+    <div>
+    <pre>
+    <h2>ĐẾ VƯƠNG</h2>
+    Một bậc quân vương mang trong con tim hình hài đất nước
+    Ngỡ như gian nan ta sẽ chẳng bao giờ buồn
+    Nào ngờ một hôm ngao du nhân gian chạm một ánh mắt
+    Khiến cho ta say ta mê như trốn thiên đường
+
+    Trời cao như đang trêu ngươi thân ta khi bông hoa ấy
+    Trót mang con tim trao cho một nam nhân thường
+    Giận lòng ta ban cho bông hoa thơm hồi về cung cấm
+    Khiến em luôn luôn bên ta mãi mãi không buồn
+
+    Mà nào ngờ đâu thân em nơi đây tâm trí nơi nào
+    Nhìn về quê hương em ôm tương tư nặng lòng biết bao
+    Một người nam nhân không vinh không hoa mà có lẽ nào
+    Người lại yêu thương quan tâm hơn ta một đế vương sao
+
+    Giọt lệ quân vương không khi nào rơi khi nước chưa tàn
+    Mà tình chưa yên nên vương trên mi giọt buồn chứa chan
+    Đành lòng buông tay cho em ra đi với mối tình vàng
+    Một bậc quân vương uy nghiêm oai phong nhưng tim nát tan
+    `
+    let lyrics4 = `
+    <div class="close"><ion-icon name="close-circle-outline" class="list-icon" onclick="closeLyrics()"></ion-icon>
+    </div>
+    <div>
+    <pre>
+    <h2>MÃI MÃI LÀ BAO LÂU</h2>
+    Đã có lúc em hỏi anh
+    Rằng bên nhau mãi mãi là bao lâu
+    Mà sao em chẳng thấy tương lai
+    Đâu là hạnh phúc
+    Đã có lúc anh từng nghĩ
+    Đến những ngày của sau này
+    Của đôi ta Sẽ chẳng còn xa những tháng ngày
+
+    Không còn lời hứa
+    Thì thầm bên tai hằng đêm
+    Xa vời ngày tháng mình bên nhau êm đềm
+    ĐK: Vì cơn mưa rơi mau chiều nay Làm nhòe hết yêu thương em bao ngày
+    Vì anh chẳng thể nói lên Tiếng yêu này vẫn chưa,
+    vẫn chưa phôi phai
+    Chẳng thể mong em sẽ dừng bước
+    Chỉ muốn em sẽ đến lúc biết được
+    Rằng anh vẫn còn yêu Vẫn còn yêu rất nhiều
+
+    Bridge: Là vì do chính anh Không mang được hạng phúc cho em hay là
+    Điều gì giưa chúng ta
+    Dần làm em xa cách
+    Mãi mãi sẽ là bao lâu, hay là lời hứa lúc tình còn đậm sâu..!
+
+    Là vì anh đã sai làm sao giữ em ở lại
+    `
+    let lyrics5 = `
+    <div class="close"><ion-icon name="close-circle-outline" class="list-icon" onclick="closeLyrics()"></ion-icon>
+    </div>
+    <div>
+    <pre>
+    <h2>NGÂY THƠ</h2>
+    Thời gian sẽ chẳng đợi chờ điều gì
+    Và cho đến khi ta nhận ra
+    Tình yêu giống một trò đùa dại khờ
+    Hay anh quá ngây thơ khi tin vào em
+    Cánh hoa phai tàn kìa tiếng mưa đang rơi
+    Lòng bỗng như chơi vơi càng nhớ em không rời
+    Đã hơn hai giờ nhắm mắt nhưng không mơ
+    Đầu vẫn đang ngu ngơ chìm đắm trong hững hờ
+    Từng cuộc gọi mỗi tối làm sao anh quên
+    Kìa giọng nói em còn vương vấn anh
+    Thì thầm đâu đó lời nào bên tai
+    Vậy là lời nói yêu em là người nói điêu
+    Là do anh ngây thơ tưởng tình là cơn mơ
+    Là do anh ngây thơ tưởng tình là cơn mơ
+    Thời gian sẽ chẳng đợi chờ điều gì
+    Và cho đến khi ta nhận ra
+    Tình yêu giống một trò đùa dại khờ
+    Hay anh quá ngây thơ khi tin vào em
+    Cánh hoa phai tàn kìa tiếng mưa đang rơi
+    Lòng bỗng như chơi vơi càng nhớ em không rời
+    Đã hơn hai giờ nhắm mắt nhưng không mơ
+    Đầu vẫn đang ngu ngơ chìm đắm trong hững hờ
+    Từng cuộc gọi mỗi tối làm sao anh quên
+    Kìa giọng nói em còn vương vấn anh
+    Thì thầm đâu đó lời nào bên tai
+    Vậy là lời nói yêu em là người nói điêu
+    Là do anh ngây thơ tưởng tình là cơn mơ
+    Là do anh ngây thơ tưởng tình là cơn mơ
+    `
+    document.querySelector('.listSong').classList.add('lsong-hidden')
+    document.querySelector('.lyrics').classList.remove('lyrics-hidden')
+    // document.querySelector('.lyrics').innerHTML = lyrics`${id}`;
+    switch (id) {
+        case 1: {
+            document.querySelector('.lyrics').innerHTML = lyrics1;
+            break;
+        }
+        case 2: {
+            document.querySelector('.lyrics').innerHTML = lyrics2;
+            break;
+        }
+        case 3: {
+            document.querySelector('.lyrics').innerHTML = lyrics3;
+            break;
+        }
+        case 4: {
+            document.querySelector('.lyrics').innerHTML = lyrics4;
+            break;
+        }
+        case 5: {
+            document.querySelector('.lyrics').innerHTML = lyrics5;
+            break;
+        }
+    }
+}
