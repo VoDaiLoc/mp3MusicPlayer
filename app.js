@@ -507,7 +507,6 @@ function displayLyrics(id) {
     `
     document.querySelector('.listSong').classList.add('lsong-hidden')
     document.querySelector('.lyrics').classList.remove('lyrics-hidden')
-    // document.querySelector('.lyrics').innerHTML = lyrics`${id}`;
     switch (id) {
         case 1: {
             document.querySelector('.lyrics').innerHTML = lyrics1;
