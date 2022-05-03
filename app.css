@@ -11,6 +11,13 @@
     color: #333;
 }
 
+.list-icon {
+    font-size: 40px;
+    text-align: center;
+    cursor: pointer;
+    color: #696969;
+}
+
 h1 {
     text-align: center;
     margin: 20px;
@@ -39,10 +46,6 @@ h4 {
     background-image: url(images/background.jpg);
     background-size: 100% 100%;
 }
-
-
-
-
 
 .layout-between {
     width: 28%;
@@ -99,37 +102,6 @@ h4 {
     justify-content: space-between;
 }
 
-
-
-.action {
-    width: 90%;
-    margin: 140px auto;
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-}
-
-.btn-primary {
-    color: #333;
-    background-color: white;
-    border-color: white;
-    border-radius: 7px
-}
-
-.list {
-    display: flex;
-}
-
-#list-sp {
-    display: block;
-    width: 140px;
-    color: #333;
-}
-
-#icon-menu {
-    margin: -2px;
-}
-
 .layout-left {
     width: 35%;
     height: 680px;
@@ -137,7 +109,6 @@ h4 {
     margin: 10px;
     margin-left: 10px;
     border-radius: 15px;
-
 }
 
 .list-song {
@@ -156,14 +127,6 @@ h4 {
 .lists:hover {
     background-color: gray;
 }
-
-.list-icon {
-    font-size: 40px;
-    text-align: center;
-    cursor: pointer;
-    color: #696969;
-}
-
 
 .list-image {
     width: 20%;
@@ -213,6 +176,7 @@ h4 {
 .lsong-hidden {
     display: none;
 }
+
 .lyrics-hidden {
     display: none;
 }

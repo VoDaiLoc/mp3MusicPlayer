@@ -61,37 +61,41 @@ function renderListPlaying() {
 
 
 function displayMusicPlayer() {
-    let htmls = `
-            <div class= "music-image" id='music-imageid'>
-                <img class= "image ani-none" src="images/${newMusics[0].image}" alt="music-image">
+    if (newMusics.length > 0) {
+        let htmls = `
+        <div class= "music-image" id='music-imageid'>
+            <img class= "image ani-none" src="images/${newMusics[0].image}" alt="music-image">
+        </div>
+        <div class="textName">
+            <h3 class="music-name">${newMusics[0].songName}</h3>
+            <p class="singer-name">Trình bày: ${newMusics[0].singer}</p>
+        </div>
+        <div class="range-group">
+            <input type="range" class="range" oninput="changeRangeBar()">
+            <audio src="musics/${newMusics[0].musicFile}" id="song" onended="endSong()"></audio>
+        </div>
+        <div class="times">
+            <div class="present-time"></div>
+            <div class="duration-time"></div>
+        </div>
+        <div class="controls">
+            <ion-icon name="shuffle" id="random" class="ion-icon" onclick="playRandom()" ></ion-icon>
+            <ion-icon name="play-back" class="ion-icon play-back" onclick="playBack()"></ion-icon>
+            <div class="play-pause">
+                <ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>
             </div>
-            <div class="textName">
-                <h3 class="music-name">${newMusics[0].songName}</h3>
-                <p class="singer-name">Trình bày: ${newMusics[0].singer}</p>
-            </div>
-            <div class="range-group">
-                <input type="range" class="range" oninput="changeRangeBar()">
-                <audio src="musics/${newMusics[0].musicFile}" id="song" onended="endSong()"></audio>
-            </div>
-            <div class="times">
-                <div class="present-time"></div>
-                <div class="duration-time"></div>
-            </div>
-            <div class="controls">
-                <ion-icon name="shuffle" id="random" class="ion-icon" onclick="playRandom()" ></ion-icon>
-                <ion-icon name="play-back" class="ion-icon play-back" onclick="playBack()"></ion-icon>
-                <div class="play-pause">
-                    <ion-icon name="play" class="ion-icon" onclick="playPause()" id="play"></ion-icon>
-                </div>
-                <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
-                <ion-icon name="repeat" id="repeat" class="ion-icon" onclick="repeatSong()"></ion-icon>
-            </div>
-            <div id ="lyric"><h4 onclick="displayLyrics(${newMusics[0].id})">Lời bài hát</h4></div>
-          
-        `
-    let htmlsDefault = `
+            <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
+            <ion-icon name="repeat" id="repeat" class="ion-icon" onclick="repeatSong()"></ion-icon>
+        </div>
+        <div id ="lyric"><h4 onclick="displayLyrics(${newMusics[0].id})">Lời bài hát</h4></div>
+    `
+        document.querySelector('.layout-between').innerHTML = htmls
+        song = document.querySelector('#song');
+    }
+    else {
+        let htmlsDefault = `
         <div class= "music-image">
-        <img class= "image ani-none" src="images/nodisc.png" alt="music-image">
+        <img class= "image ani-none" src="images/nodisc.jpg" alt="music-image">
         </div>
         <div class="textName">
             <h5 class="music-name">VUI LÒNG THÊM BÀI HÁT VÀO DANH SÁCH PHÁT</h5>
@@ -114,11 +118,6 @@ function displayMusicPlayer() {
             <ion-icon name="repeat" class="ion-icon"></ion-icon>
         </div>
             `
-    if (newMusics.length > 0) {
-        document.querySelector('.layout-between').innerHTML = htmls
-        song = document.querySelector('#song');
-    }
-    else {
         document.querySelector('.layout-between').innerHTML = htmlsDefault;
     }
 }
@@ -173,6 +172,7 @@ let indexSong = 0;
 
 
 function displayTime() {
+    song = document.querySelector('#song')
     document.querySelector('.range').max = song.duration;
     document.querySelector('.range').value = song.currentTime;
     if (!song.duration) {
@@ -337,7 +337,6 @@ function closeLyrics() {
 
 
 
-displayTime();
 setInterval(displayTime, 500);
 renderListSong();
 renderListPlaying();
