@@ -86,15 +86,7 @@ function displayMusicPlayer() {
                 <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
                 <ion-icon name="repeat" id="repeat" class="ion-icon" onclick="repeatSong()"></ion-icon>
             </div>
-            <div class="action">
-                <div class="addMusic">
-                    <button type="button" class="btn btn-primary" onclick="openListSong()">DANH SÁCH BÀI HÁT</button>
-                </div>
-                <div class="list">
-                    <span id="list-sp">DANH SÁCH PHÁT</span>
-                    <ion-icon name="menu" class="ion-icon" id="icon-menu" onclick="openPlayList()"></ion-icon>
-                </div>
-            </div>
+          
         `
     let htmlsDefault = `
         <div class= "music-image">
@@ -119,15 +111,6 @@ function displayMusicPlayer() {
             </div>
             <ion-icon name="play-forward" class="ion-icon play-forward" onclick="playForward()"></ion-icon>
             <ion-icon name="repeat" class="ion-icon"></ion-icon>
-        </div>
-        <div class="action">
-            <div class="addMusic">
-                <button type="button" class="btn btn-primary" onclick="openListSong()">DANH SÁCH BÀI HÁT</button>
-            </div>
-            <div class="list">
-                <span id="list-sp">DANH SÁCH PHÁT</span>
-                <ion-icon name="menu" class="ion-icon" id="icon-menu" onclick="openPlayList()"></ion-icon>
-            </div>
         </div>
             `
     if (newMusics.length > 0) {
@@ -215,7 +198,13 @@ function playSong(id) {
         }
     }
     displayChange(index);
-    playPause();
+    if (notPlaying) {
+        playPause();
+    }
+    else {
+        notPlaying = true;
+        playPause();
+    }
 }
 
 
