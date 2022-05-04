@@ -38,7 +38,9 @@
 
 h1 {
     text-align: center;
+    color: white;
     margin: 20px;
+    background-color: #404093
 }
 
 h2 {

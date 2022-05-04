@@ -18,8 +18,10 @@ var musics = [
     new Music(5, 'tangduytan.jpg', 'Ngây Thơ', 'Tăng Duy Tân', 'NgayTho.mp3')
 ]
 
+
+
 var newMusics = [];
-const key_data = "musics_data";
+const key_data = "newMusics_data";
 if (getData(key_data) == null) {
     newMusics = [];
 }
@@ -37,7 +39,24 @@ function setData(key, data) {
 
 function renderListSong() {
     let htmls = musics.map(function (music) {
-        return `
+        let result = newMusics.find(function (music1) {
+            if (music.id == music1.id) return true;
+        })
+        console.log(result);
+        if (result == null) {
+            return `
+                <div class="lists">
+                <div  class="list-icon icon-notes"><ion-icon name="musical-notes"></ion-icon></div>
+                <div class="list-image"><img src="images/${music.image}" alt="image${music.id}" class="avatar"></div>
+                <div class="list-title">
+                    <h3>${music.songName}</h3>
+                    <h5>${music.singer}</h5>
+                </div>
+                <div  class="list-add${music.id} list-icon icon-add" ><ion-icon  name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
+                </div>
+            `;
+        } else {
+            return `
             <div class="lists">
             <div  class="list-icon icon-notes"><ion-icon name="musical-notes"></ion-icon></div>
             <div class="list-image"><img src="images/${music.image}" alt="image${music.id}" class="avatar"></div>
@@ -45,9 +64,11 @@ function renderListSong() {
                 <h3>${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div  class="list-add${music.id} list-icon icon-add"><ion-icon  name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
+            <div  class="list-add${music.id} list-icon icon-add add-hidden" ><ion-icon  name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
             </div>
-        `
+        `;
+        }
+
     })
     document.querySelector('.list-song').innerHTML = htmls.join('');
 }
