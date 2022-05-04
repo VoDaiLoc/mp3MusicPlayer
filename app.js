@@ -19,28 +19,21 @@ var musics = [
 ]
 
 var newMusics = [];
-// const key_data = "musics_data";
-// function init() {
-//     if (getData(key_data) == null) {
-//         musics = [
-//             new Music(1, 'lalatran.jpg', 'Anh Yêu Vội Thế - Remix', 'Lala Trần', 'AnhYeuVoiThe.mp3'),
-//             new Music(2, 'thientu.jpg', 'Cô Độc Vương - Remix', 'Thiên Tú', 'CoDocVuongRemix.mp3'),
-//             new Music(3, 'dunghoangpham.jpg', 'Đế Vương - Remix', 'Dung Hoàng Phạm', 'DeVuongRemix.mp3'),
-//             new Music(4, 'xuanduc.jpg', 'Mãi Mãi Là Bao Lâu - ReMix', 'Xuân Đức', 'MaiMaiLaBaoLau.mp3'),
-//             new Music(5, 'tangduytan.jpg', 'Ngây Thơ', 'Tăng Duy Tân', 'NgayTho.mp3')
-//         ]
-//     }
-//     else {
-//         newMusics = getData(key_data);
-//     }
-// }
-// function getData(key) {
-//     return JSON.parse(localStorage.getItem(key));
-// }
+const key_data = "musics_data";
+if (getData(key_data) == null) {
+    newMusics = [];
+}
+else {
+    newMusics = getData(key_data);
+}
 
-// function setData(key, data) {
-//     localStorage.setItem(key, JSON.stringify(data));
-// }
+function getData(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function setData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
 
 function renderListSong() {
     let htmls = musics.map(function (music) {
@@ -158,6 +151,7 @@ function addPlaylist(id) {
         document.querySelector(`.list-add${id}`).classList.add("add-hidden");
         renderListPlaying();
         displayMusicPlayer();
+        setData(key_data, newMusics);
     }
     else {
         alert('Bài hát này đã có trong danh sách phát rồi');
@@ -182,6 +176,7 @@ function removeSong(id) {
         }
         renderListPlaying();
         displayMusicPlayer();
+        setData(key_data, newMusics);
     }
 }
 
@@ -355,7 +350,6 @@ function closeLyrics() {
 }
 
 
-// init();
 setInterval(displayTime, 500);
 renderListSong();
 renderListPlaying();

@@ -126,6 +126,8 @@ h4 {
     margin: 10px;
     margin-left: 10px;
     border-radius: 15px;
+    background-image: url(images/background.jpg);
+    background-size: 100% 100%;
 }
 
 .list-song {
@@ -172,6 +174,8 @@ h4 {
     margin: 10px;
     margin-right: 10px;
     border-radius: 15px;
+    background-image: url(images/background1.jpg);
+    background-size: 100% 100%;
 
 }
 
