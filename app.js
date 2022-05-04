@@ -19,21 +19,40 @@ var musics = [
 ]
 
 var newMusics = [];
+// const key_data = "musics_data";
+// function init() {
+//     if (getData(key_data) == null) {
+//         musics = [
+//             new Music(1, 'lalatran.jpg', 'Anh Yêu Vội Thế - Remix', 'Lala Trần', 'AnhYeuVoiThe.mp3'),
+//             new Music(2, 'thientu.jpg', 'Cô Độc Vương - Remix', 'Thiên Tú', 'CoDocVuongRemix.mp3'),
+//             new Music(3, 'dunghoangpham.jpg', 'Đế Vương - Remix', 'Dung Hoàng Phạm', 'DeVuongRemix.mp3'),
+//             new Music(4, 'xuanduc.jpg', 'Mãi Mãi Là Bao Lâu - ReMix', 'Xuân Đức', 'MaiMaiLaBaoLau.mp3'),
+//             new Music(5, 'tangduytan.jpg', 'Ngây Thơ', 'Tăng Duy Tân', 'NgayTho.mp3')
+//         ]
+//     }
+//     else {
+//         newMusics = getData(key_data);
+//     }
+// }
+// function getData(key) {
+//     return JSON.parse(localStorage.getItem(key));
+// }
 
-
-
+// function setData(key, data) {
+//     localStorage.setItem(key, JSON.stringify(data));
+// }
 
 function renderListSong() {
     let htmls = musics.map(function (music) {
         return `
             <div class="lists">
-            <div class="list-icon"><ion-icon name="musical-notes"></ion-icon></div>
+            <div  class="list-icon icon-notes"><ion-icon name="musical-notes"></ion-icon></div>
             <div class="list-image"><img src="images/${music.image}" alt="image${music.id}" class="avatar"></div>
             <div class="list-title">
                 <h3>${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-add${music.id} list-icon"><ion-icon name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
+            <div  class="list-add${music.id} list-icon icon-add"><ion-icon  name="add-circle-outline" onclick="addPlaylist(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -44,13 +63,13 @@ function renderListPlaying() {
     let htmls = newMusics.map(function (music) {
         return `
             <div class="lists">
-            <div class="list-icon"><ion-icon name="musical-notes"></ion-icon></div>
+            <div class="list-icon icon-notes"><ion-icon name="musical-notes"></ion-icon></div>
             <div class="list-image"><img src="images/${music.image}" alt="image${music.id}" class="avatar"></div>
             <div class="list-title">
                 <h3 class="linkSongName" onclick="playSong(${music.id})">${music.songName}</h3>
                 <h5>${music.singer}</h5>
             </div>
-            <div class="list-remove list-icon"><ion-icon name="trash-outline"  onclick="removeSong(${music.id})"></ion-icon></div>
+            <div class="list-remove list-icon icon-remove"><ion-icon name="trash-outline"  onclick="removeSong(${music.id})"></ion-icon></div>
             </div>
         `
     })
@@ -336,7 +355,7 @@ function closeLyrics() {
 }
 
 
-
+// init();
 setInterval(displayTime, 500);
 renderListSong();
 renderListPlaying();

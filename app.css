@@ -12,10 +12,28 @@
 }
 
 .list-icon {
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     cursor: pointer;
     color: #696969;
+}
+
+.icon-add {
+    display: block;
+    padding-top: 7px;
+    padding-right: 5px;
+}
+
+.icon-remove {
+    display: block;
+    padding-top: 7px;
+    padding-right: 5px;
+}
+
+.icon-notes {
+    display: block;
+    padding-top: 7px;
+    padding-left: 3px;
 }
 
 h1 {
@@ -133,6 +151,7 @@ h4 {
 
 .list-title {
     width: 60%;
+    margin-top: 7px;
 }
 
 .avatar {
