@@ -19,7 +19,6 @@ var musics = [
 ]
 
 
-
 var newMusics = [];
 const key_data = "newMusics_data";
 if (getData(key_data) == null) {
@@ -42,7 +41,6 @@ function renderListSong() {
         let result = newMusics.find(function (music1) {
             if (music.id == music1.id) return true;
         })
-        console.log(result);
         if (result == null) {
             return `
                 <div class="lists">
@@ -157,27 +155,21 @@ function displayMusicPlayer() {
 
 
 function addPlaylist(id) {
-    let checkMusic = newMusics.find(function (musical) {
-        return musical.id == id;
-
-    })
-    if (!checkMusic) {
-        let music;
-        for (let i = 0; i < musics.length; i++) {
-            if (musics[i].id == id) {
-                music = musics[i];
-            }
+    let music;
+    for (let i = 0; i < musics.length; i++) {
+        if (musics[i].id == id) {
+            music = musics[i];
         }
-        newMusics.push(music);
-        document.querySelector(`.list-add${id}`).classList.add("add-hidden");
-        renderListPlaying();
+    }
+    newMusics.push(music);
+    document.querySelector(`.list-add${id}`).classList.add("add-hidden");
+    renderListPlaying();
+    if (newMusics.length == 1) {
         displayMusicPlayer();
-        setData(key_data, newMusics);
     }
-    else {
-        alert('Bài hát này đã có trong danh sách phát rồi');
-    }
+    setData(key_data, newMusics);
 }
+
 
 function removeSong(id) {
     let music;
@@ -192,8 +184,8 @@ function removeSong(id) {
     if (confirmed) {
         newMusics.splice(index, 1);
         document.querySelector(`.list-add${id}`).classList.remove("add-hidden");
-        if (newMusics.length == 0) {
-            song = null;
+        if (!notPlaying) {
+            notPlaying = true;
         }
         renderListPlaying();
         displayMusicPlayer();
